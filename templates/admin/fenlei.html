@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新经资讯后台管理</title>
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+	<script type="text/javascript" src="../../static/admin/js/jquery-1.12.4.min.js"></script>
+</head>
+
+    
+        <tr>
+            
+        </tr>
+ 
+<body>
+	<div class="breadcrub">
+		<h3><a href="/background/fenlei_detail">添加</a></h3>
+		<form method="GET">
+				<input name="searchtitle" type="text" />&nbsp;&nbsp;<input type="submit" value="搜索" />
+				</form>
+		
+		</div>
+		<div class="pannel">
+			<table class="common_table">
+				
+				<tr>
+					<td width="10%">编号</td>
+					<td width="10%">分类名称</td>
+					<td width="10%">级别</td>
+					<td width="10%">商品数量</td>
+					<td width="10%">数量单位</td>
+					<td width="10%">是否显示导航栏</td>
+					<td width="10%">是否显示</td>
+					<td width="10%">排序</td>
+					<td width="10%">设置</td>
+					<td width="10%">操作</td>
+                    
+				</tr>
+				{% for item in res %}
+				<tr>
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.level}}</td>
+					<td>{{item.logo}}</td>
+					<td>{{item.b_logo}}</td>
+					
+					<td>{{item.status}}</td>
+					<td>{{item.is_nav_status}}</td>
+					<td>{{item.sort}}</td>
+					<td>
+							<a href="javascript:look({{item.id}})">查看下级</a>
+							<a href="/background/del_brand?id={{item.id}}">转移商品</a>
+					</td>
+					<td>
+							<a href="/background/fenlei_detail?id={{item.id}}">编辑</a>
+							<a href="/background/del_fenlei?id={{item.id}}">删除</a>
+					</td>
+					
+				</tr>
+			
+				{% endfor %}
+				
+
+				
+			</table>
+		</div>
+
+		
+</body>
+<script>
+	function look(id){
+		$.ajax({
+				url:'look',
+				type:'post',
+				dataType:'json',
+				data:{'id':id},
+				success:function(res){
+					console.log(res.xiaji)
+					if(res.code==200){
+						var html = ""
+						var mes = res.xiaji
+						var length = mes.length
+						alert(mes)
+					for(var i=0;i<length;i++){
+						alert('dsafsadfas')
+						html += "<tr><td width='10%'>编号</td><td width='10%'>分类名称</td><td width='10%'>级别</td><td width='10%'>商品数量</td><td width='10%'>数量单位</td><td width='10%'>是否显示导航栏</td><td width='10%'>是否显示</td><td width='10%'>排序</td><td width='10%'>设置</td><td width='10%'>操作</td></tr>"
+						html += "<tr><td>"+mes[i]['id']+"</td><td>"+mes[i]['name']+"</td><td>"+mes[i]['level']+"</td><td>"+mes[i]['sort']+"</td><td>"+mes[i]['is_nav_status']+"</td><td>"+mes[i]['status']+"</td><td>"+mes[i]['descrip']+"</td><td><a href=''>查看下级</a><a href=''>转移商品</a></td><td><a href='/background/fenlei_detail?id="+mes[i]['id']+"'>编辑</a><a href='/background/del_fenlei?id="+mes[i]['id']+"'>删除</a></td></tr>"
+					};
+					$(".pannel").html(html)
+					alert(html)
+					}
+					
+				}
+
+			})
+	}
+
+
+</script>
+
+</html>

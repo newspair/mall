@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>秒杀活动列表</title>
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+	<script type="text/javascript" src="../../static/admin/js/jquery-1.12.4.min.js"></script>
+</head>
+
+    
+        <tr>
+            
+        </tr>
+ 
+<body>
+	<div class="breadcrub">
+		<h3><a href="/background/shop_add">添加</a></h3>
+		<form method="GET">
+				<label>活动名称</label><input name="searchtitle" type="text" />&nbsp;&nbsp;
+
+				</form>
+		
+		</div>
+		<div class="pannel">
+			<table class="common_table">
+				<tr>
+					<td width="10%">编号</td><td width="10%">活动标题</td><td width="10%">活动状态</td><td>开始时间</td><td>结束时间</td>
+					
+					<td width="10%">上线/下线</td>
+					
+					<td width="30%">操作</td>
+                    
+				</tr>
+				{% for item in res %}
+				<tr>
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{shop_lei}}</td>
+					{% if item.select_type == 0 %}
+					<td>唯一</td>
+					{% elif item.select_type == 1 %}
+					<td>单选</td>
+					{% else %}
+					<td>多选</td>
+					{% endif %}
+					{% if item.input_type == 0 %}
+					<td>手动录入</td>
+					{% else %}
+					<td>从列表中选</td>
+					{% endif %}
+					<td>{{item.input_list}}</td>
+					<td>{{item.sort}}</td>
+					<td width="20%">
+							<a href="/background/brand__detail?id={{item.id}}">编辑</a>
+							<a href="/background/del_shuxing?id={{item.id}}">删除</a>
+						</td>
+					
+				</tr>
+				{% endfor %}
+				
+
+				
+			</table>
+		</div>
+
+		<div class="pop_con">
+			<div class="pop">
+				<form>
+					<h3>修改分类</h3>
+					<div class="form_group mt50">
+						<label class="input_label">分类名称：</label><input type="text" name='name' class="input_txt3">
+                       
+						<span class="error_tip">提示文字</span>
+					</div>
+					<div class="form_group line_top">
+						<input type="button" value="确定" class="confirm">&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="button" value="取消" class="cancel">
+					</div>
+				</form>
+			</div>
+			<div class="mask"></div>
+		</div>
+</body>
+</html>

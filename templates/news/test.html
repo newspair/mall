@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+<title>无标题页</title> 
+<script type="text/javascript" src="../../static/news/js/jquery-1.12.4.min.js"></script>
+<script>
+//全选、取消全选的事件  
+function selectAll(){ 
+    
+    if ($("#checkall").prop("checked")) {        
+        $("input[type='checkbox'][name='checkedres']").prop("checked",true);//全选
+    } else {               
+        $("input[type='checkbox'][name='checkedres']").prop("checked",false);  //取消全选     
+    }  
+}  
+//子复选框的事件  
+function setSelectAll(){  
+    //当没有选中某个子复选框时，SelectAll取消选中  
+    if (!$("#checkedres").checked) {  
+        $("#checkall").prop("checked", false);  
+    }  
+    var chsub = $("input[type='checkbox'][name='checkedres']").length; //获取subcheck的个数  
+    var checkedsub = $("input[type='checkbox'][name='checkedres']:checked").length; //获取选中的subcheck的个数  
+    if (checkedsub == chsub) {  
+        $("#checkall").prop("checked", true);  
+    }  
+}
+</script>
+</head> 
+<body> 
+    //设置全选复选框
+    <input id="checkall" name="checkall" type="checkbox" onclick="selectAll()"/>全选
+    //设置子复选框
+    <input id="checkedres" name="checkedres" type="checkbox" onclick="setSelectAll()"/>item 1
+    <input id="checkedres" name="checkedres" type="checkbox" onclick="setSelectAll()"/>item 2
+    <input id="checkedres" name="checkedres" type="checkbox" onclick="setSelectAll()"/>item 3
+    <input id="checkedres" name="checkedres" type="checkbox" onclick="setSelectAll()"/>item 4
+</body> 
+</html>

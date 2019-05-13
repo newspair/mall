@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新经资讯后台管理</title>
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+	<script type="text/javascript" src="../../static/admin/js/jquery-1.12.4.min.js"></script>
+</head>
+
+    
+        <tr>
+            
+        </tr>
+ 
+<body>
+	<div class="breadcrub">
+		<h3><a class="add">添加</a></h3>
+		<form method="GET">
+				<input name="searchtitle" type="text" />&nbsp;&nbsp;<input type="submit" value="搜索" />
+				</form>
+		
+		</div>
+		<div class="pannel">
+			<table class="common_table">
+				<tr>
+					<td>编号</td><td>类型名称</td><td>属性数量</td><td>参数数量</td><td width="20%">设置</td><td width="20%">操作</td> 
+				</tr>
+				{% for item in res %}
+				<tr>
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.attribute_count}}</td>
+					<td>{{item.param_count}}</td>
+					<td>
+							<a href="/background/shuxing?id={{item.id}}">属性列表</a>
+							<a href="/background/canshu?id={{item.id}}">参数列表</a>
+					</td>
+					<td width="20%">
+							<a class="edit">编辑</a>
+							<a href="/background/del_leixing?id={{item.id}}">删除</a>
+						</td>
+					
+				</tr>
+				{% endfor %}
+				
+
+			</table>
+		</div>
+
+		<div class="pop_con">
+			<div class="pop">
+				
+					<h3>添加属性</h3>
+					<div class="form_group mt50">
+						<label class="input_label">属性名称：</label><input type="text" name='name' class="input_txt3">
+                       
+						<span class="error_tip">提示文字</span>
+					</div>
+					<div class="form_group line_top">
+						<input type="button" value="确定" class="confirm">&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="button" value="取消" class="cancel">
+					</div>
+			
+			</div>
+			<div class="mask"></div>
+		</div>
+</body>
+<script>
+	$(function(){
+	var $add = $(".add");
+	var $pop = $(".pop_con");
+	var $cancel = $(".cancel");
+	var $confirm = $(".confirm");
+	var $edit = $(".edit")
+	$add.click(function(){
+	
+	$pop.show();
+
+});
+$cancel.click(function(){
+        $pop.hide();
+        
+	});
+	$edit.click(function(){
+	
+	$pop.show();
+	$pop.find('h3').html('修改属性');
+
+	});
+$confirm.click(function(){
+		var name = $('.input_txt3').val();
+		$.ajax({
+            url:url,
+            type:'POST',
+            data:params,
+            dataType:'json',
+            success:function(res){
+            console.log(res)
+                if(res.code == 200){
+                    location.reload();
+                }else{
+                    $error.html(res.message).show();
+                }
+            }
+
+        })
+    });
+
+
+
+	})
+	
+
+</script>
+</html>

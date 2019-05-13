@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新经资讯后台管理</title>
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+    <script type="text/javascript" src="../../static/admin/js/jquery-1.12.4.min.js"></script>
+    <script src="../../static/admin/tinymce/js/tinymce/tinymce.min.js"></script>
+    
+</head>
+<body>
+    <div class="breadcrub">
+            
+        </div>
+        <div class="pannel">
+            <form method="POST" enctype="multipart/form-data" action="/background/fenlei_detail">
+                
+            <div class="form_group">
+                <label>分类名称</label>
+                <input type="text" name="name" value="">
+            </div>
+            <div class="form_group">
+                    <label>上级分类</label>
+                    <div class="category_name"></div>
+                    <select name="s_fen">
+                        {% for item in res %}
+                        <option value="{{item.id}}">{{item.name}}</option>
+                        {% endfor %}
+                    </select>>
+            </div>
+            
+            <div class="form_group">
+                <label>数量单位</label>
+                
+                <input type="text" name="shu_dan"/>
+            </div>
+          
+            <div class="form_group">
+                <label>排序</label>
+                <div class="category_name">
+                    <input type="text" name="sort"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>是否显示</label><br />
+                <div class="category_name">
+                    是<input type="radio" value="0" name="xianshi" class="id_show"/>
+                    否<input type="radio" value="1" name="xianshi" class="id_show"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>是否显示在导航栏</label><br />
+                <div class="category_name">
+                    是<input type="radio" value="0" name="dao" class="shang"/>
+                    否<input type="radio" value="1" name="dao" class="shang"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>分类图标</label>
+                <div class="rich_wrap fl">
+                    <img src="../../" alt="索引图片" class="index_pic">
+                    <input type="file" name="tubiao"/>
+                </div>
+            </div>
+            <div class="form_group">
+                <label>筛选属性属性</label>
+                <div class="category_name">
+                    <select name="shuxing">
+                        <option></option>
+                    </select>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>关键词</label>
+                <div class="category_name">
+                    <input type="text" name="key_word"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>分类描述</label>
+                <div class="category_name">
+                    <input type="text" name="describe"/>
+                </div>
+                
+            </div>
+
+            <button type="submit" value="提交">提交</button>
+                
+           
+			<td type='hidden' name='id'>{{id}}</td>
+					
+            </form>    
+        </div>
+        
+        <script>
+        $(function(){
+            var $radio = $('input[name="action"]');
+            $radio.click(function(){
+                if($(this).index()==1)
+                {
+                    $('.group_hide').show();
+                }
+                else{
+                    $('.group_hide').hide();
+                }
+            });
+
+            tinymce.init({
+                //选择class为content的标签作为编辑器
+                selector: '#rich_content',
+                //方向从左到右
+                directionality:'ltr',
+                //语言选择中文
+                language:'zh_CN',
+                //高度为400
+                height:400,
+                width: '100%',
+                //按tab不换行
+                nonbreaking_force_tab: true,
+                readonly:1
+            });
+            
+            })        
+        </script>    
+</body>
+
+
+
+
+
+</html>

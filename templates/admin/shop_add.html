@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新经资讯后台管理</title>
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+    <script type="text/javascript" src="../../static/admin/js/jquery-1.12.4.min.js"></script>
+    <script src="../../static/admin/tinymce/js/tinymce/tinymce.min.js"></script>
+    
+</head>
+<style>
+    #div1{
+      width:170px;
+      height:100px;
+      border-radius:50px;
+      position:relative;
+    }
+    #div2{
+      width:96px;
+      height:96px;
+      border-radius:48px;
+      position:absolute;
+      background:white;
+      box-shadow:0px 2px 4px rgba(0,0,0,0.4);
+    }
+    .open1{
+      background:rgba(0,184,0,0.8);
+    }
+    .open2{
+      top:2px;
+      right:1px;
+    }
+    .close1{
+      background:rgba(255,255,255,0.4);
+      border:3px solid rgba(0,0,0,0.15);
+      border-left:transparent;
+    }
+    .close2{
+      left:0px;
+      top:0px;
+      border:2px solid rgba(0,0,0,0.1);
+    }
+    </style>
+<body>
+   
+        <div class="pannel" id="m1" >
+            <form method="POST" enctype="multipart/form-data" action="/background/shop_add">
+                
+            <div class="form_group">
+                <label>商品名称</label>
+                <input type="text" name="name" value="">
+            </div>
+            <div class="form_group">
+                    <label>商品分类</label>
+                    <div class="category_name"></div>
+                    <select name="s_fen">
+                        {% for item in fen %}
+                        <option value="{{item.id}}">{{item.name}}</option>
+                        {% endfor %}
+                    </select>>
+            </div>
+            
+            <div class="form_group">
+                <label>副标题</label>
+                
+                <input type="text" name="biao"/>
+            </div>
+          
+            <div class="form_group">
+                <label>商品品牌</label>
+                <div class="category_name"></div>
+                <select name="s_pin">
+                    {% for item in pin %}
+                    <option value="{{item.id}}">{{item.name}}</option>
+                    {% endfor %}
+                </select>>
+        </div>
+            <div class="form_group">
+                <label>商品介绍</label><br />
+                <div class="category_name">
+                    <input type="text" name="s_jieshao"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>商品货号</label><br />
+                <div class="category_name">
+                    <input type="text" name="s_code"/>
+                </div>
+                
+            </div>
+           
+           
+            <div class="form_group">
+                <label>商品售价</label>
+                <div class="category_name">
+                    <input type="text" name="s_money"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>市场价</label>
+                <div class="category_name">
+                    <input type="text" name="sc_money"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>商品库存</label>
+                <div class="category_name">
+                    <input type="text" name="s_count"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>计量单位</label>
+                <div class="category_name">
+                    <input type="text" name="danwei"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>商品重量</label>
+                <div class="category_name">
+                    <input type="text" name="s_zhong"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>排序</label>
+                <div class="category_name">
+                    <input type="text" name="sort"/>
+                </div>
+                
+            </div>
+
+            <button type="button" id="s1">点击进入下一阶段</button>
+                
+           
+			<td type='hidden' name='id'>{{id}}</td>
+					
+            </form>    
+        </div>
+        
+
+
+        <div class="pannel" id="m2">
+            <form method="POST" enctype="multipart/form-data" action="/background/shop_add">
+                
+            <div class="form_group">
+                <label>赠送积分</label>
+                <input type="text" name="name" value="">
+            </div>
+            <div class="form_group">
+                <label>赠送成长值</label>
+                <input type="text" name="name" value="">
+            </div>
+            
+            <div class="form_group">
+                <label>积分购买限制</label>
+                
+                <input type="text" name="biao"/>
+            </div>
+          
+            <div id="div1" class="open1">
+                <div id="div2" class="open2"></div>
+              </div>
+              <div class="form_group">
+                <label>预告商品</label><br />
+                <div class="category_name">
+                    <input type="text" name="s_jieshao"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>商品上架</label><br />
+                <div class="category_name">
+                    <input type="text" name="s_jieshao"/>
+                </div>
+                
+            </div>
+
+            <div class="form_group">
+                <label>商品推荐</label><br />
+                <div class="category_name">
+                    <input type="text" name="s_jieshao"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>服务保证</label><br />
+                <div class="category_name">
+                    无忧退货<input type="checkbox" name="s_code"/>
+                    快速退款<input type="checkbox" name="s_code"/>
+                    免费包邮<input type="checkbox" name="s_code"/>
+                    
+                </div>
+                
+            </div>
+           
+           
+            <div class="form_group">
+                <label>详情页标题</label>
+                <div class="category_name">
+                    <input type="text" name="s_money"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>详情页描述</label>
+                <div class="category_name">
+                    <input type="text" name="sc_money"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>商品关键字</label>
+                <div class="category_name">
+                    <input type="text" name="s_count"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>商品备注</label>
+                <div class="category_name">
+                    <input type="text" name="danwei"/>
+                </div>
+                
+            </div>
+            <div class="form_group">
+                <label>选择优惠方式:</label>
+                <div class="category_name">
+                    无优惠<input type="checkbox" name="s_code"/>
+                    特惠促销<input type="checkbox" name="s_code"/>
+                    会员价格<input type="checkbox" name="s_code"/>
+                    阶梯价格<input type="checkbox" name="s_code"/>
+                    
+                </div>
+                
+            </div>
+            
+
+            <button type="button" id="s2">点击进入下一阶段</button>
+                
+           
+			<td type='hidden' name='id'>{{id}}</td>
+					
+            </form>    
+        </div>
+
+
+
+
+        
+        <div class="breadcrub">
+            
+        </div>
+        <div class="pannel" id="m3">
+            <form method="POST" enctype="multipart/form-data" action="/background/shop_add">
+                
+                <div class="form_group">
+                    <label>属性类型</label>
+                    <div class="category_name"></div>
+                    <select name="s_fen">
+                        {% for item in fen %}
+                        <option value="{{item.id}}">{{item.name}}</option>
+                        {% endfor %}
+                    </select>>
+            </div>
+            <div class="form_group">
+                <label>商品规格</label>
+                <input type="text" name="name" value="">
+            </div>
+            
+            <div class="form_group">
+                <label>商品参数</label>
+                <div class="category_name"></div>
+                屏幕尺寸：<input type="text" name=""/>
+                网络：<select name="s_fen">
+                    {% for item in fen %}
+                    <option value="{{item.id}}">{{item.name}}</option>
+                    {% endfor %}
+                </select>
+                系统：<select name="s_fen">
+                    {% for item in fen %}
+                    <option value="{{item.id}}">{{item.name}}</option>
+                    {% endfor %}
+                </select>>
+                电池容量：<input type="text" name=""/>
+            </div>
+          
+            
+              <div class="form_group">
+                <label>商品相册：</label><br />
+                <div class="category_name">
+                    <img src="" >
+                    <input type="file" name="file"/>
+                </div>
+
+                <div class="form_group">
+                    <label>新闻内容：</label>
+                    <div class="rich_wrap fl">
+                        <input class="input_area" id="rich_content" value="{{goods.content}}" name="content" />
+                    </div>
+                </div>
+                
+          
+                
+        <div>
+            
+
+            <button type="button" id="s3">点击进入下一阶段</button>
+                
+           
+			<td type='hidden' name='id'>{{id}}</td>
+					
+            </form>    
+        </div>
+
+
+        <script>
+            window.onload=function(){
+              var div2=document.getElementById("div2");
+              var div1=document.getElementById("div1");
+              div2.onclick=function(){
+                div1.className=(div1.className=="close1")?"open1":"close1";
+                div2.className=(div2.className=="close2")?"open2":"close2";
+              }
+            }
+            </script>
+
+
+
+        <script>
+        $(function(){
+            var $radio = $('input[name="action"]');
+            $radio.click(function(){
+                if($(this).index()==1)
+                {
+                    $('.group_hide').show();
+                }
+                else{
+                    $('.group_hide').hide();
+                }
+            });
+
+            tinymce.init({
+                //选择class为content的标签作为编辑器
+                selector: '#rich_content',
+                //方向从左到右
+                directionality:'ltr',
+                //语言选择中文
+                language:'zh_CN',
+                //高度为400
+                height:400,
+                width: '100%',
+                //按tab不换行
+                nonbreaking_force_tab: true,
+                readonly:1
+            });
+            
+            })        
+        </script>    
+</body>
+
+<script>
+$(function(){
+            var $m1 = $("#m1");
+            var $m2 = $("#m2");
+            var $m3 = $("#m3");
+
+            var $s1 = $("#s1");
+            var $s2 = $("#s2");
+            var $s3 = $("#s3");
+            $m1.show();
+            $m2.hide();
+            $m3.hide();
+            $s1.click(function(){
+            $m2.show();
+            $m1.hide();
+            $m3.hide();
+            });
+            $s2.click(function(){
+            $m3.show();
+            $m1.hide();
+            $m2.hide();
+            });
+
+           
+            
+            })      
+
+
+
+</script>
+
+
+
+</html>
